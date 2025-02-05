@@ -11,6 +11,30 @@ This is a Health AI Agent that helps track fitness in google sheets. You can ask
 - Query pushups, sleep score, steps, and workout status
   - `What was my sleep score yesterday?`
 
+### Architecture
+
+```mermaid
+sequenceDiagram
+    actor User
+    participant Telegram Bot
+    participant Gemini AI
+    participant Google Sheets
+
+    User->>Telegram Bot: Sends message<br/>(e.g., "Log 50 pushups")
+    Telegram Bot->>Gemini AI: Analyze intent and<br/>extract structured data
+    Gemini AI-->>Telegram Bot: Returns XML with<br/>intent and metrics
+    
+    alt Query Intent
+        Telegram Bot->>Google Sheets: Fetch data for<br/>specified date/metric
+        Google Sheets-->>Telegram Bot: Return requested data
+    else Log Intent
+        Telegram Bot->>Google Sheets: Update/Create row<br/>with new metrics
+        Google Sheets-->>Telegram Bot: Confirm update
+    end
+    
+    Telegram Bot-->>User: Send confirmation or<br/>requested data
+```
+
 ## Operating Instructions
 
 ### Set Required Environment Variables
@@ -31,4 +55,3 @@ source venv/bin/activate
 pip install -r requirements.txt
 python OnePercentBetter.py
 ```
-
