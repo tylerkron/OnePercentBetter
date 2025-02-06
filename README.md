@@ -11,6 +11,10 @@ This is a Health AI Agent that helps track fitness in google sheets. You can ask
 - Query pushups, sleep score, steps, and workout status
   - `What was my sleep score yesterday?`
 
+## Limitations / Potential Improvements
+
+- Does not handle multi-turn conversations.
+
 ### Architecture
 
 ```mermaid
